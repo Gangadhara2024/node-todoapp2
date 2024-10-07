@@ -1,8 +1,9 @@
+let skip = 0;
 window.onload = gernerateTodos();
 
 function gernerateTodos() {
   axios
-    .get("/readitem")
+    .get(`/readitem?skip=${skip}`)
     .then((res) => {
       console.log(res.data);
 
@@ -10,7 +11,11 @@ function gernerateTodos() {
         return alert(res.data.message);
       }
 
+      console.log(skip);
       const todos = res.data.data;
+      skip += todos.length;
+      console.log(skip);
+
       document.getElementById("item_list").insertAdjacentHTML(
         "beforeend",
         todos
@@ -107,5 +112,7 @@ document.addEventListener("click", (event) => {
         window.location.href = "/loginform";
       })
       .catch((err) => console.log(err));
+  } else if (event.target.classList.contains("show-more")) {
+    gernerateTodos();
   }
 });

@@ -58,9 +58,6 @@
         flex-direction: column;
         align-items: center;
       }
-      #todo-btn {
-        background-color: blue;
-      }
     </style>
   </head>
 
@@ -75,12 +72,13 @@
           placeholder="enter todos"
         />
         <button class="add-item">Add New Item</button>
+        <button class="logout bg-dark p-1">Log-out</button>
+        <button class="logoutall bg-dark p-1">Log-out from all devices</button>
       </div>
 
-      <ul id="item_list"></ul>
+      <ul id="item_list" class="ul p-3"></ul>
 
-      <button class="logout">Log-out</button>
-      <button class="logoutall">Log-out from all devices</button>
+      <button class="show-more bg-success border-0 rounded p-1">Show-more</button>
     </div>
 
     <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>

@@ -193,9 +193,17 @@ app.post("/createitem", isAuth, async (req, res) => {
 
 app.get("/readitem", isAuth, async (req, res) => {
   const username = req.session.user.username;
+  const SKIP = Number(req.query.skip) || 0;
+  const LIMIT = 5;
 
   try {
-    const todoDb = await todoModel.find({ username: username });
+    // const todoDb = await todoModel.find({ username: username });
+
+    const todoDb = await todoModel.aggregate([
+      { $match: { username: username } },
+      { $skip: SKIP },
+      { $limit: LIMIT },
+    ]);
 
     if (todoDb.length === 0) {
       return res.send({
